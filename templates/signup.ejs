@@ -15,5 +15,41 @@
     </form>
 </div>
     </div>
+    <script>
+        const form = document.querySelector('form');
+        const usernameError = document.querySelector('.error.username');
+        const emailError = document.querySelector('.error.email');
+        const passwordError = document.querySelector('.error.password');
+
+        form.addEventListener('submit', async e =>{
+            e.preventDefault();
+            let username = form.username.value;
+            let email = form.email.value;
+            let password = form.password.value;
+
+            usernameError.textContent = "";
+            emailError.textContent = "";
+            passwordError.textContent = "";
+
+            const res = await fetch('/signup',{
+                method: 'POST',
+                body: JSON.stringify({username,email,password}),
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+
+            const data = await res.json();
+
+            if(data.errors){
+                usernameError.textContent = data.errors.username;
+                emailError.textContent = data.errors.email;
+                passwordError.textContent = data.errors.password;
+            }
+            if(data.user){
+                location.assign('/')
+            }
+        })
+    </script>
 </body>
 </html>
