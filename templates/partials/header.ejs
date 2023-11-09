@@ -13,13 +13,16 @@
             <nav class="navigation">
                 <ul>
                     <li><a href="/" class="link">Home</a></li>
-                    <li><a href="/login" class="link">Login</a></li>
-                    <li><a href="/signup" class="link">Sign up</a></li>
+                    <% if(!user) { %>
+                        <li><a href="/login" class="link">Login</a></li>
+                        <li><a href="/signup" class="link">Sign up</a></li>
+                    <% } %>
                 </ul>
-                <a href="" class="logout-link">Logout</a>
-                <span  class="username-span">Username</span>
-                <img src="/images/mili-3.jpg" alt="user-profile" class="user-profile">
-                
+                <% if(user) { %>
+                    <a href="/logout" class="logout-link">Logout</a>
+                    <span  class="username-span"><%= user.username %></span>
+                    <img src="/images/mili-3.jpg" alt="user-profile" class="user-profile">
+                <% } %>
             </nav>
         </header>
 

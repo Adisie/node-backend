@@ -84,6 +84,10 @@ const signup_post = async (req,res) => {
     }
 }
 
+const logout_get = (req,res) => {
+    res.cookie("auth","",{maxAge: 1})
+    res.redirect('/')
+}
 
 
 module.exports = {
@@ -91,5 +95,6 @@ module.exports = {
     login_post,
     signup_get,
     signup_post,
+    logout_get,
 }
 

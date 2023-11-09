@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 
 // import custom routes
 const authRoutes = require('./routes/authRoutes');
-const authRequred = require('./middleware/authRequired');
+const {authRequred,getUser} = require('./middleware/authRequired');
 
 
 const app = express();
@@ -29,6 +29,8 @@ mongoose.connect(process.env.MONGODB_URL)
 .catch(err=>{
     console.log(err);
 })
+
+app.get('*',getUser);
 
 app.get('/',(req,res)=>{
     res.status(200).render('home',{title: "Home"})
