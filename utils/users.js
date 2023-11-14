@@ -17,7 +17,7 @@ const errorHandler = err => {
     }
 
     if(err.message === 'Wrong Password'){
-        errors.email = 'Wrong Password'
+        errors.password = 'Wrong Password'
     }
 
     if(err.code === 11000){
