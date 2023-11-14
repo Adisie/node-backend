@@ -7,7 +7,7 @@ const authRequired = (req,res,next) => {
     if(token){
         jwt.verify(token,process.env.JWT_KEY,async (err,decodedToken)=>{
             if(err){
-                return res.status(490).json({
+                return res.status(401).json({
                     errors: 'AUTH_FAILED'
                 })
             }
@@ -21,7 +21,7 @@ const authRequired = (req,res,next) => {
             next()
         })
     }else {
-        res.status(490).json({
+        res.status(401).json({
             errors: "AUTH_FAILED"
         })
     }
